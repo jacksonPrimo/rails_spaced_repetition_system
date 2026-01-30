@@ -4,6 +4,7 @@ if ENV.fetch('RAILS_ENV') == 'development'
     DB_HOST
     DB_USER
     DB_PASSWORD
+    JWT_SECRET
   ].freeze
 
   missing_envs = required.select { |env| ENV.fetch(env, '').blank? }
