@@ -1,11 +1,17 @@
 class AuthController < ApplicationController
-  def signin
-    result = ::UseCases::Auth::Signin.new(params).call
-    render_result result
+  def signin; end
+
+  def signup; end
+
+  def do_signin
+    result = ::Auth::Signin.new(params).call
+    render_result result, success_path: :signin
   end
 
-  def signup
-    result = ::UseCases::Auth::Signup.new(params).call
-    render_result result
+  def do_signup
+    result = ::Auth::Signup.new(
+      params.permit(:name, :email, :password).to_h
+    ).call
+    render_result result, success_path: :signup
   end
 end

@@ -12,7 +12,12 @@ module Auth
     end
 
     def authenticate
-      raise CustomException.new('password or email incorrect', 403) unless @user&.authenticate(@params[:password])
+      raise CustomException.new(
+        message: 'password or email incorrect',
+        code: 403,
+        redirect_path: :signin
+      ) unless @user&.authenticate(@params[:password])
+
       encode_token(@user)
     end
   end
