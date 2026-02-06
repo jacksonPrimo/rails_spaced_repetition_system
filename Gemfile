@@ -50,6 +50,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'tailwindcss-rails'
 
 group :development, :test do
+  gem 'pry', '~> 0.15.0'
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ]
 end
