@@ -1,0 +1,10 @@
+<div class="max-w-2xl mx-auto mt-10 px-4">
+  <div class="mb-6">
+    <%= link_to '← Voltar', packs_path, class: "text-indigo-600 hover:text-indigo-800 text-sm font-medium" %>
+    <h1 class="text-3xl font-bold text-gray-900 mt-2">Criar Novo Pack</h1>
+  </div>
+
+  <div class="bg-white p-8 rounded-xl shadow-md border border-gray-100">
+    <%= render 'form', pack: Pack.new %>
+  </div>
+</div>

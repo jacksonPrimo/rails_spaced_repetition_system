@@ -1,0 +1,13 @@
+<%= form_with(model: pack, local: true, class: "space-y-6") do |f| %>
+  <div>
+    <%= f.label :title, "Título do Pack", class: "block text-sm font-medium text-gray-700" %>
+    <div class="mt-1">
+      <%= f.text_field :title, required: true, placeholder: "Ex: Cartões de Inglês", class: "block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-3 border" %>
+    </div>
+    <p class="mt-2 text-xs text-gray-500">Escolha um nome claro para organizar seus estudos.</p>
+  </div>
+
+  <div class="pt-4">
+    <%= f.submit pack.new_record? ? "Criar Pack" : "Salvar Alterações", class: "w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 cursor-pointer transition duration-150" %>
+  </div>
+<% end %>
