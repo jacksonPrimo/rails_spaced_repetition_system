@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  resources :packs
+  get 'cards/create'
+  resources :packs do
+    resources :cards, only: [:create]
+  end
 
   namespace :auth do
     get 'signin'

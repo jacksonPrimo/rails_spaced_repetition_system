@@ -9,8 +9,8 @@ class ApplicationController < ActionController::Base
     respond_to do |format|
       format.json { render json: { message: exception.message, details: exception.details }, status: exception.code || :unprocessable_entity }
       format.html do
-        flash.now[:alert] = exception.message
-        render exception.redirect_path, status: exception.code || :unprocessable_entity
+        flash[:alert] = exception.message
+        redirect_to exception.redirect_path
       end
     end
   end

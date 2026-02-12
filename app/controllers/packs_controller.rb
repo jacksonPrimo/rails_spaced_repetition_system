@@ -7,6 +7,7 @@ class PacksController < ApplicationController
 
   def show
     @pack = Pack.find_by(user_id: current_user.id, id: params[:id])
+    @total_cards = ::Card.where(pack_id: @pack.id).count
   end
 
   def new; end
