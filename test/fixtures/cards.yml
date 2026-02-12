@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  front: MyString
+  context_phrase: MyString
+  back: MyString
+  show_at: 2026-02-08 08:38:55
+  last_answer: MyString
+  last_answer_at: 2026-02-08 08:38:55
+  user: one
+  pack: one
+
+two:
+  front: MyString
+  context_phrase: MyString
+  back: MyString
+  show_at: 2026-02-08 08:38:55
+  last_answer: MyString
+  last_answer_at: 2026-02-08 08:38:55
+  user: two
+  pack: two
