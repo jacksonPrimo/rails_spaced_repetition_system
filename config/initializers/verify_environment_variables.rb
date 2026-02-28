@@ -1,10 +1,9 @@
-if ENV.fetch('RAILS_ENV') == 'development'
+if ENV.fetch('RAILS_ENV', 'development') == 'development'
   required = %w[
     DB_PORT
     DB_HOST
     DB_USER
     DB_PASSWORD
-    JWT_SECRET
   ].freeze
 
   missing_envs = required.select { |env| ENV.fetch(env, '').blank? }

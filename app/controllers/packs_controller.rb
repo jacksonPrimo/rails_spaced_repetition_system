@@ -1,5 +1,5 @@
 class PacksController < ApplicationController
-  before_action :authenticate_user
+  before_action :authenticate_user!
 
   def index
     @packs = Pack.where(user_id: current_user.id)

@@ -1,9 +1,9 @@
 class ApplicationController < ActionController::Base
-  include AuthHelper
+  before_action :configure_permitted_parameters, if: :devise_controller?
+
   # proteção contra CSRF para formulários HTML
   protect_from_forgery with: :exception
   rescue_from ::CustomException, with: :custom_exception_handler
-  helper_method :current_user, :user_signed_in?
 
   def custom_exception_handler(exception)
     respond_to do |format|
@@ -22,31 +22,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def authenticate_user
-    token = request.headers['Authorization']&.remove('Bearer ') || session[:token]
-    decoded_token = decode_token(token)
+  protected
 
-    @current_user = User.find_by(id: decoded_token['user_id'])
-
-    render_unauthorized('Usuário não encontrado') unless @current_user
-  rescue JWT::ExpiredSignature
-    render_unauthorized('token expirado')
-  rescue JWT::DecodeError
-    render_unauthorized('token inválido')
-  end
-
-  def current_user
-    @current_user
-  end
-
-  def user_signed_in?
-    current_user.present?
-  end
-
-  def render_unauthorized(message)
-    respond_to do |format|
-      format.json { render json: { error: message }, status: :unauthorized }
-      format.html { redirect_to '/auth/signin', alert: message }
-    end
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:name])
   end
 end

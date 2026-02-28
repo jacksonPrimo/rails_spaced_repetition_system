@@ -1,5 +1,5 @@
 class CardsController < ApplicationController
-  before_action :authenticate_user
+  before_action :authenticate_user!
 
   def create
     pack = Pack.find(params[:pack_id])
