@@ -43,9 +43,7 @@ gem "bootsnap", require: false
 
 gem 'dotenv-rails'
 
-gem 'jwt', '~> 1.5', '>= 1.5.4'
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
-gem 'bcrypt', '~> 3.1.7'
 
 gem 'tailwindcss-rails'
 
@@ -71,3 +69,5 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+gem "devise", "~> 5.0"
