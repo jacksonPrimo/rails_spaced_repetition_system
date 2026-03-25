@@ -1,0 +1,50 @@
+<div class="max-w-3xl mx-auto mt-10 px-4">
+  <div class="mb-4">
+    <%= link_to 'Voltar para Packs', packs_path, class: "text-indigo-600 hover:text-indigo-800" %>
+  </div>
+
+  <% if @card.present? %>
+    <div class="bg-white shadow-xl rounded-2xl overflow-hidden border border-gray-100">
+      <div class="px-6 py-4 flex justify-between items-center border-b border-gray-100 bg-gray-50">
+        <h2 class="text-xl font-bold text-gray-800">Revisar Card</h2>
+        <button disabled class="px-3 py-1 bg-gray-300 text-gray-500 rounded text-sm font-semibold opacity-50 cursor-not-allowed">
+          Editar
+        </button>
+      </div>
+
+      <div class="p-8 text-center min-h-[200px] flex flex-col justify-center items-center">
+        <h3 class="text-3xl font-medium text-gray-900 mb-6"><%= @card.front %></h3>
+
+        <div id="context-phrase" class="hidden mb-6 w-full mt-4 p-4 bg-indigo-50 border-l-4 border-indigo-500 text-left">
+          <p class="text-sm font-semibold text-indigo-800 mb-1">Frase de Contexto:</p>
+          <p class="text-lg text-gray-700 italic">"<%= @card.context_phrase %>"</p>
+        </div>
+
+        <div id="card-back" class="hidden w-full mt-2 pt-6 border-t border-gray-200">
+          <p class="text-2xl font-bold text-green-600"><%= @card.back %></p>
+        </div>
+      </div>
+
+      <div class="px-6 py-4 bg-gray-50 border-t border-gray-100 flex flex-col sm:flex-row justify-center space-y-3 sm:space-y-0 sm:space-x-4">
+        <button id="reveal-btn" onclick="document.getElementById('context-phrase').classList.remove('hidden'); document.getElementById('card-back').classList.remove('hidden'); this.classList.add('hidden'); document.getElementById('answer-actions').classList.remove('hidden');" class="w-full sm:w-auto px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-lg shadow-md transition duration-200">
+          Revelar 
+        </button>
+
+        <div id="answer-actions" class="hidden flex w-full justify-center space-x-4">
+          <%= button_to "De Novo", answer_pack_card_path(@pack, @card, answer: 'de_novo'), method: :patch, class: "flex-1 px-4 py-3 bg-red-100 hover:bg-red-200 text-red-800 font-bold rounded-lg transition duration-200 shadow-sm" %>
+          <%= button_to "Difícil", answer_pack_card_path(@pack, @card, answer: 'dificil'), method: :patch, class: "flex-1 px-4 py-3 bg-yellow-100 hover:bg-yellow-200 text-yellow-800 font-bold rounded-lg transition duration-200 shadow-sm" %>
+          <%= button_to "Fácil", answer_pack_card_path(@pack, @card, answer: 'facil'), method: :patch, class: "flex-1 px-4 py-3 bg-green-100 hover:bg-green-200 text-green-800 font-bold rounded-lg transition duration-200 shadow-sm" %>
+        </div>
+      </div>
+    </div>
+  <% else %>
+    <div class="bg-white shadow rounded-lg p-10 text-center border border-gray-200">
+      <svg class="mx-auto h-12 w-12 text-green-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+      </svg>
+      <h3 class="text-xl font-medium text-gray-900 mb-2">Você terminou!</h3>
+      <p class="text-gray-500 mb-6">Não há mais cards para revisar neste pack no momento.</p>
+      <%= link_to 'Voltar para os Packs', packs_path, class: "inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+    </div>
+  <% end %>
+</div>

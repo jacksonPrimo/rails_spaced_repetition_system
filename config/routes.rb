@@ -2,7 +2,10 @@ Rails.application.routes.draw do
   devise_for :users
   get 'cards/create'
   resources :packs do
-    resources :cards, only: [:create]
+    get :review, to: 'cards#review'
+    resources :cards, only: [:create] do
+      patch :answer, on: :member
+    end
   end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

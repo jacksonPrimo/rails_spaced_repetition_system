@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_02_28_173642) do
+ActiveRecord::Schema[7.1].define(version: 2026_03_22_120634) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -18,13 +18,13 @@ ActiveRecord::Schema[7.1].define(version: 2026_02_28_173642) do
     t.string "front"
     t.string "context_phrase"
     t.string "back"
-    t.datetime "show_at"
+    t.datetime "next_review_at"
     t.string "last_answer"
-    t.datetime "last_answer_at"
     t.bigint "user_id", null: false
     t.bigint "pack_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.interval "waiting_time"
     t.index ["pack_id", "front"], name: "index_cards_on_pack_id_and_front", unique: true
     t.index ["pack_id"], name: "index_cards_on_pack_id"
     t.index ["user_id"], name: "index_cards_on_user_id"
