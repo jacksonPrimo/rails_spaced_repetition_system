@@ -1,9 +1,11 @@
 if ENV.fetch('RAILS_ENV', 'development') == 'development'
   required = %w[
-    DB_PORT
-    DB_HOST
-    DB_USER
-    DB_PASSWORD
+    DATABASE_URL
+    SMTP_ADDRESS
+    SMTP_PORT
+    SMTP_DOMAIN
+    SMTP_USERNAME
+    SMTP_PASSWORD
   ].freeze
 
   missing_envs = required.select { |env| ENV.fetch(env, '').blank? }
