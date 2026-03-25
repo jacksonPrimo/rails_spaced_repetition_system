@@ -1,20 +1,14 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  port: <%= ENV.fetch("DB_PORT") { 5432 } %>
-  host: <%= ENV.fetch("DB_HOST") { "localhost" } %>
-  user: <%= ENV.fetch("DB_USER") { "myuser" } %>
-  password: <%= ENV.fetch("DB_PASSWORD") { "mypassword" } %>
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  url: <%= ENV['DATABASE_URL'] %>
 
 development:
   <<: *default
-  database: rails_spaced_repetition_system_development
 
 test:
   <<: *default
-  database: rails_spaced_repetition_system_test
 
 production:
   <<: *default
-  database: rails_spaced_repetition_system_production

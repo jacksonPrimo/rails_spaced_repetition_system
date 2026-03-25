@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+    db:
+        image: postgres:16-alpine
+        environment:
+          - POSTGRES_USER=myuser
+          - POSTGRES_PASSWORD=mypassword
+        ports:
+            - '5432:5432'
+        volumes:
+            - pg:/var/lib/postgresql/data
+    web:
+        build: .
+        command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails db:prepare && bundle exec rails s -p 3000 -b '0.0.0.0'"
+        volumes:
+            - .:/rails
+        ports:
+            - '3000:3000'
+        depends_on:
+            - db
+        env_file:
+            - .env
+
+    test:
+        build: .
+        command: bash -c 'bundle exec rails db:prepare && eval bundle exec rspec $${RSPEC_ARGS:-}'
+        volumes:
+            - .:/rails
+        depends_on:
+            - db
+        environment:
+            - DATABASE_URL=postgresql://postgres:password@db:5432/rails_spaced_repetition_system_test
+            - SMTP_ADDRESS=""
+            - SMTP_PORT=""
+            - SMTP_DOMAIN=""
+            - SMTP_USERNAME=""
+            - SMTP_PASSWORD=""
+
+volumes:
+    pg:
