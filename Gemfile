@@ -47,6 +47,8 @@ gem 'dotenv-rails'
 
 gem 'tailwindcss-rails'
 
+gem "aws-sdk-s3", require: false
+
 group :development, :test do
   gem 'pry', '~> 0.15.0'
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
