@@ -34,7 +34,7 @@ class CardsController < ApplicationController
   def create
     pack = Pack.find(params[:pack_id])
     new_card = Card.new(
-      params.require(:card).permit(:front, :back, :context_phrase).merge(
+      params.require(:card).permit(:front, :back, :context_phrase, :image, :audio).merge(
         user_id: current_user.id,
         pack_id: pack.id,
         next_review_at: Time.now
